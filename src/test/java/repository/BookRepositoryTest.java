@@ -1,5 +1,6 @@
 package repository;
 
+import br.com.sages.catalog.bookstore_api.BookstoreApiApplication;
 import br.com.sages.catalog.bookstore_api.domain.Book;
 
 import br.com.sages.catalog.bookstore_api.repository.BookRepository;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = BookstoreApiApplication.class)
 public class BookRepositoryTest {
 
     private static final String GENRE = "Arts, Film & Photography";
