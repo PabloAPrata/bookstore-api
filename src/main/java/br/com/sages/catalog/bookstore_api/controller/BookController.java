@@ -26,6 +26,11 @@ public class BookController {
 
         Response<BookDTO> response = new Response<BookDTO>();
 
+        if (result.hasErrors()) {
+            result.getAllErrors().forEach(e -> response.getErrors().add(e.getDefaultMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+
         Book book = service.save(this.convertDtoToEntity(dto));
 
         response.setData(this.convertEntityToDto(book));
@@ -35,6 +40,7 @@ public class BookController {
 
     private Book convertDtoToEntity(BookDTO dto) {
         Book book = new Book();
+        book.setId(dto.getId());
         book.setTitle(dto.getTitle());
         book.setAuthor(dto.getAuthor());
         book.setMainGenre(dto.getMainGenre());
@@ -51,6 +57,7 @@ public class BookController {
     private BookDTO convertEntityToDto(Book book) {
 
         BookDTO dto = new BookDTO();
+        dto.setId(book.getId());
         dto.setTitle(book.getTitle());
         dto.setAuthor(book.getAuthor());
         dto.setMainGenre(book.getMainGenre());

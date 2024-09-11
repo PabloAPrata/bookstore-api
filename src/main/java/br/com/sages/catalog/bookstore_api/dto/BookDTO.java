@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class BookDTO {
 
+    private Long id;
+
     @NotBlank(message = "Enter a title.")
     @Size(min = 2, max = 500, message = "The title must contain between {min} and {max} characters.")
     private String title;
@@ -34,7 +36,7 @@ public class BookDTO {
     private String type;
 
     @NotNull(message = "Enter a price.")
-    private BigDecimal price;
+    private Double price;
 
     @DecimalMin(value = "0.0", inclusive = true, message = "The rating must be at least {value}.")
     @DecimalMax(value = "5.0", inclusive = true, message = "The rating must be at most {value}.")
