@@ -1,12 +1,12 @@
 package br.com.sages.catalog.bookstore_api.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
+
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -34,10 +34,13 @@ public class BookDTO {
     private String type;
 
     @NotNull(message = "Enter a price.")
-    private String price;
+    private BigDecimal price;
 
+    @DecimalMin(value = "0.0", inclusive = true, message = "The rating must be at least {value}.")
+    @DecimalMax(value = "5.0", inclusive = true, message = "The rating must be at most {value}.")
     private Double rating;
 
+    @DecimalMin(value = "0.0", inclusive = true, message = "The rating must be at least {value}.")
     private Integer numberOfPeopleRated;
 
     @NotBlank(message = "Enter an URL.")

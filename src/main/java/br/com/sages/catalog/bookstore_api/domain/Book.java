@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,8 +33,8 @@ public class Book {
     @Column(name = "type", nullable = false, length = 48)
     private String type;
 
-    @Column(name = "price", nullable = false, length = 10)
-    private String price;
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "rating")
     private Double rating;

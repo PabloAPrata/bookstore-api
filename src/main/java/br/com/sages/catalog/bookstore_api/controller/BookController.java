@@ -1,0 +1,66 @@
+package br.com.sages.catalog.bookstore_api.controller;
+
+import br.com.sages.catalog.bookstore_api.domain.Book;
+import br.com.sages.catalog.bookstore_api.dto.BookDTO;
+import br.com.sages.catalog.bookstore_api.response.Response;
+import br.com.sages.catalog.bookstore_api.service.BookService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("books")
+public class BookController {
+
+    @Autowired
+    private BookService service;
+
+    @PostMapping
+    public ResponseEntity<Response<BookDTO>> create(@Valid @RequestBody BookDTO dto, BindingResult result) {
+
+        Response<BookDTO> response = new Response<BookDTO>();
+
+        Book book = service.save(this.convertDtoToEntity(dto));
+
+        response.setData(this.convertEntityToDto(book));
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    private Book convertDtoToEntity(BookDTO dto) {
+        Book book = new Book();
+        book.setTitle(dto.getTitle());
+        book.setAuthor(dto.getAuthor());
+        book.setMainGenre(dto.getMainGenre());
+        book.setSubGenre(dto.getSubGenre());
+        book.setType(dto.getType());
+        book.setPrice(dto.getPrice());
+        book.setRating(dto.getRating());
+        book.setNumberOfPeopleRated(dto.getNumberOfPeopleRated());
+        book.setUrl(dto.getUrl());
+
+        return book;
+    }
+
+    private BookDTO convertEntityToDto(Book book) {
+
+        BookDTO dto = new BookDTO();
+        dto.setTitle(book.getTitle());
+        dto.setAuthor(book.getAuthor());
+        dto.setMainGenre(book.getMainGenre());
+        dto.setSubGenre(book.getSubGenre());
+        dto.setType(book.getType());
+        dto.setPrice(book.getPrice());
+        dto.setRating(book.getRating());
+        dto.setNumberOfPeopleRated(book.getNumberOfPeopleRated());
+        dto.setUrl(book.getUrl());
+
+        return dto;
+    }
+}
