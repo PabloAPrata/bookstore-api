@@ -70,7 +70,7 @@ public class BookRepositoryTest {
 
     @Test
     public void testFindByGenre() {
-        Optional<List<Book>> response = repository.findByMainGenreEquals(GENRE);
+        Optional<List<Book>> response = repository.findAllBookByMainGenreEquals(GENRE);
 
         assertTrue(response.isPresent());
 
@@ -83,7 +83,7 @@ public class BookRepositoryTest {
 
     @Test
     public void testFindByAuthor() {
-        Optional<List<Book>> response = repository.findByAuthorEquals(AUTHOR);
+        Optional<List<Book>> response = repository.findAllBookByAuthorEquals(AUTHOR);
 
         assertTrue(response.isPresent());
 

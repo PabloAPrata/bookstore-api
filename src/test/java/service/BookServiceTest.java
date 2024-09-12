@@ -35,7 +35,7 @@ public class BookServiceTest {
     public void setUp() {
         List<Book> books = List.of(new Book());
 
-        BDDMockito.given(repository.findByAuthorEquals(Mockito.anyString())).willReturn(Optional.of(books));
+        BDDMockito.given(repository.findAllBookByAuthorEquals(Mockito.anyString())).willReturn(Optional.of(books));
     }
 
     @Test

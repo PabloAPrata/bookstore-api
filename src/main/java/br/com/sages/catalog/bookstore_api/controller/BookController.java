@@ -63,10 +63,30 @@ public class BookController {
             response.setData(convertEntityToDto(book));
             return ResponseEntity.ok(response);
         } else {
-            response.getErrors().add("Livro não encontrado com ID: " + id);
+            response.getErrors().add("Book " + id + "not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<Response<List<BookDTO>>> getBooksByGenre(@PathVariable("genre") String genre) {
+        Response<List<BookDTO>> response = new Response<>();
+
+        Optional<List<Book>> books = service.findByMainGenre(genre);
+
+        if (books.isEmpty() || books.get().isEmpty()) {
+            response.getErrors().add("No books found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        List<BookDTO> booksDTO = books.get().stream()
+                .map(this::convertEntityToDto)
+                .toList();
+
+        response.setData(booksDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 
     private Book convertDtoToEntity(BookDTO dto) {
         Book book = new Book();

@@ -32,11 +32,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<List<Book>> findByMainGenre(String mainGenre) {
-        return repository.findByMainGenreEquals(mainGenre);
+        return repository.findAllBookByMainGenreEquals(mainGenre);
     }
 
     @Override
     public Optional<List<Book>> findByAuthor(String author) {
-        return repository.findByAuthorEquals(author);
+        return repository.findAllBookByAuthorEquals(author);
     }
 }
