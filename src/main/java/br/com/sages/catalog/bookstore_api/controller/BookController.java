@@ -53,7 +53,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<BookDTO>> getBookById(@PathVariable("id") Long id) {
+    public ResponseEntity<Response<BookDTO>> getById(@PathVariable("id") Long id) {
         Response<BookDTO> response = new Response<>();
 
         Optional<Book> bookOptional = service.findById(id);
@@ -69,7 +69,7 @@ public class BookController {
     }
 
     @GetMapping("/genre/{genre}")
-    public ResponseEntity<Response<List<BookDTO>>> getBooksByGenre(@PathVariable("genre") String genre) {
+    public ResponseEntity<Response<List<BookDTO>>> getByGenre(@PathVariable("genre") String genre) {
         Response<List<BookDTO>> response = new Response<>();
 
         Optional<List<Book>> books = service.findByMainGenre(genre);
@@ -87,6 +87,24 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
+    @GetMapping("/author/{author}")
+    public ResponseEntity<Response<List<BookDTO>>> getByAuthor(@PathVariable("author") String author) {
+        Response<List<BookDTO>> response = new Response<>();
+
+        Optional<List<Book>> books = service.findByAuthor(author);
+
+        if (books.isEmpty() || books.get().isEmpty()) {
+            response.getErrors().add("No books found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        List<BookDTO> booksDTO = books.get().stream()
+                .map(this::convertEntityToDto)
+                .toList();
+
+        response.setData(booksDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
     private Book convertDtoToEntity(BookDTO dto) {
         Book book = new Book();
