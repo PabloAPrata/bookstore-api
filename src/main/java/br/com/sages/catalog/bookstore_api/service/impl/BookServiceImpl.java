@@ -4,6 +4,7 @@ import br.com.sages.catalog.bookstore_api.domain.Book;
 import br.com.sages.catalog.bookstore_api.repository.BookRepository;
 import br.com.sages.catalog.bookstore_api.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Cacheable("books")
     public List<Book> findAll() {
         return repository.findAll();
     }
