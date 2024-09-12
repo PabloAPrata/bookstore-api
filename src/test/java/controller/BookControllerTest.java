@@ -89,7 +89,7 @@ public class BookControllerTest {
         book.setMainGenre(GENRE);
         book.setSubGenre(SUBGENRE);
         book.setType(TYPE);
-        book.setPrice(PRICE);
+        book.setPrice(BigDecimal.valueOf(PRICE));
         book.setRating(RATING);
         book.setNumberOfPeopleRated(NUMBEROFPEOPLERATED);
         book.setUrl(URLBOOK);
@@ -105,7 +105,7 @@ public class BookControllerTest {
         dto.setMainGenre(genre);
         dto.setSubGenre(subGenre);
         dto.setType(type);
-        dto.setPrice(price);
+        dto.setPrice(BigDecimal.valueOf(price));
         dto.setRating(rating);
         dto.setNumberOfPeopleRated(numberOfPeopleRated);
         dto.setUrl(url);

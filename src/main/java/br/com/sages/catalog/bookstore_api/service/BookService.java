@@ -11,6 +11,8 @@ public interface BookService {
 
     List<Book> findAll();
 
+    Optional<Book> findById(Long id);
+
     Optional<List<Book>> findByMainGenre (String mainGenre);
 
     Optional<List<Book>> findByAuthor (String author);

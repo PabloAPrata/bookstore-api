@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = BookstoreApiApplication.class)
 public class BookRepositoryTest {
 
+//    private static final Long ID = 13L;
     private static final String GENRE = "Arts, Film & Photography";
     private static final String AUTHOR = "Arthur Conan Doyle";
 
@@ -66,11 +67,6 @@ public class BookRepositoryTest {
 
         assertNotNull(response);
     }
-
-//    @Test
-//    public void testFindById() {
-//        Optional<Book> response = repository.findById();
-//    }
 
     @Test
     public void testFindByGenre() {

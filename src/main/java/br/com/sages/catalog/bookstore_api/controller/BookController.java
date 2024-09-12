@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("books")
@@ -49,6 +50,22 @@ public class BookController {
         response.setData(booksDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<BookDTO>> getBookById(@PathVariable("id") Long id) {
+        Response<BookDTO> response = new Response<>();
+
+        Optional<Book> bookOptional = service.findById(id);
+
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
+            response.setData(convertEntityToDto(book));
+            return ResponseEntity.ok(response);
+        } else {
+            response.getErrors().add("Livro não encontrado com ID: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
     private Book convertDtoToEntity(BookDTO dto) {
