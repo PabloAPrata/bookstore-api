@@ -21,6 +21,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<Book> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
     public Optional<List<Book>> findByMainGenre(String mainGenre) {
         return repository.findByMainGenreEquals(mainGenre);
     }

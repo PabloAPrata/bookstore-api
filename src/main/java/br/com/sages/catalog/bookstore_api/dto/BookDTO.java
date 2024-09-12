@@ -36,7 +36,7 @@ public class BookDTO {
     private String type;
 
     @NotNull(message = "Enter a price.")
-    private Double price;
+    private BigDecimal price;
 
     @DecimalMin(value = "0.0", inclusive = true, message = "The rating must be at least {value}.")
     @DecimalMax(value = "5.0", inclusive = true, message = "The rating must be at most {value}.")

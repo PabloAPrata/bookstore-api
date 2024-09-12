@@ -9,6 +9,8 @@ public interface BookService {
 
     Book save(Book book);
 
+    List<Book> findAll();
+
     Optional<List<Book>> findByMainGenre (String mainGenre);
 
     Optional<List<Book>> findByAuthor (String author);

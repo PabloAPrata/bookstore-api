@@ -34,7 +34,7 @@ public class Book {
     private String type;
 
     @Column(name = "price")
-    private Double price;
+    private BigDecimal price;
 
     @Column(name = "rating")
     private Double rating;

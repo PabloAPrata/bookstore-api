@@ -9,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("books")
@@ -36,6 +35,20 @@ public class BookController {
         response.setData(this.convertEntityToDto(book));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<Response<List<BookDTO>>> getAll() {
+        Response<List<BookDTO>> response = new Response<List<BookDTO>>();
+
+        List<Book> books = service.findAll();
+
+        List<BookDTO> booksDTO = books.stream().map(this::convertEntityToDto)
+                        .toList();
+
+        response.setData(booksDTO);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     private Book convertDtoToEntity(BookDTO dto) {

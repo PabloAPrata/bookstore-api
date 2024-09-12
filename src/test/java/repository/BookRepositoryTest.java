@@ -36,7 +36,7 @@ public class BookRepositoryTest {
         book.setMainGenre(GENRE);
         book.setSubGenre("Cinema & Broadcast");
         book.setType("Paperback");
-        book.setPrice(169.00);
+        book.setPrice(BigDecimal.valueOf(169.00));
         book.setRating(4.4);
         book.setNumberOfPeopleRated(19923);
         book.setUrl("https://www.amazon.in/Complete-Novels-Sherlock-Holmes/dp/8175994312/ref=zg_bs_g_1318054031_d_sccl_1/000-0000000-0000000?psc=1");
@@ -57,7 +57,7 @@ public class BookRepositoryTest {
         book.setMainGenre("Arts, Film & Photography");
         book.setSubGenre("Cinema & Broadcast");
         book.setType("Paperback");
-        book.setPrice(169.00);
+        book.setPrice(BigDecimal.valueOf(169.00));
         book.setRating(4.4);
         book.setNumberOfPeopleRated(19923);
         book.setUrl("https://www.amazon.in/Complete-Novels-Sherlock-Holmes/dp/8175994312/ref=zg_bs_g_1318054031_d_sccl_1/000-0000000-0000000?psc=1");
@@ -66,6 +66,11 @@ public class BookRepositoryTest {
 
         assertNotNull(response);
     }
+
+//    @Test
+//    public void testFindById() {
+//        Optional<Book> response = repository.findById();
+//    }
 
     @Test
     public void testFindByGenre() {
