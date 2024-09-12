@@ -2,9 +2,29 @@
 
 A RESTFul API for an independent bookstore which allows customers to browse available books by genre and author.
 
-## I. Arquitetura de Solução e Arquitetura Técnica
+---
+ 
+## 1. Requisitos
+- Java 21
+- Docker
+- Redis
+- Postgres 16
 
-### 1. Estrutura de Pacotes
+## 2. Como Executar
+
+
+---
+
+#### Importante! - Documentação Swagger
+A documentação dos endpoints está diponível. Para acessa-lá, execute a aplicação e abra no navegador o seguinte endereço:
+
+http://localhost:8080/swagger-ui/index.html
+
+---
+## Relatório de Arquitetura
+### I. Arquitetura de Solução e Arquitetura Técnica
+
+#### 1. Estrutura de Pacotes
 
 A API foi organizada com uma separação clara de responsabilidades, dividida em camadas conforme as boas práticas de desenvolvimento. A estrutura de pacotes é a seguinte:
 
@@ -16,7 +36,7 @@ A API foi organizada com uma separação clara de responsabilidades, dividida em
   Response: Uma classe padronizada para formatação de respostas da API, facilitando o controle das respostas enviadas ao cliente.
 - **Service**: Contém a lógica de negócio da aplicação, incluindo operações de persistência e manipulação de dados.
 
-### 2. Tecnologias Utilizadas
+#### 2. Tecnologias Utilizadas
 As principais tecnologias e dependências do projeto foram:
 
 - **Spring Boot 3.3.3**: Framework principal para construção da API, que fornece uma base sólida para o desenvolvimento rápido de aplicações em Java.
@@ -26,7 +46,7 @@ As principais tecnologias e dependências do projeto foram:
 - **JUnit**: Utilizado no desenvolvimento com metodologia TDD, garantindo a qualidade do código por meio de testes unitários. Foram implementados testes para validação de operações de CRUD e buscas por autor e gênero.
 - **Springdoc OpenAPI**: Gerador automático da documentação da API, facilitando o acesso e entendimento dos endpoints para o cliente.
 
-### 3. Decisões de Design
+#### 3. Decisões de Design
 
 A API foi construída com foco em modularidade e separação de responsabilidades, seguindo a arquitetura MVC (Model-View-Controller). As seguintes decisões de design merecem destaque:
 
@@ -34,15 +54,15 @@ A API foi construída com foco em modularidade e separação de responsabilidade
 - **Gerenciamento de Transações**: Foi implementado gerenciamento transacional no método de salvar um livro e na importação dos livros do CSV, assegurando consistência nos dados e controle de rollback em caso de falhas.
 - **Mapeamento Objeto-Relacional com JPA**: A aplicação foi estruturada para utilizar JPA para o mapeamento da entidade Book, facilitando a persistência de dados e operações de CRUD com o banco de dados Postgres.
 
-### 4. Integração e Comunicação
+#### 4. Integração e Comunicação
 Os endpoints da API foram construídos com base em princípios RESTful, proporcionando uma interface de comunicação clara entre a API e os clientes. A documentação gerada automaticamente pelo Swagger facilita o entendimento dos endpoints e seus parâmetros.
 
-## II. Explicação sobre o Case Desenvolvido (Plano de Implementação)
+### II. Explicação sobre o Case Desenvolvido (Plano de Implementação)
 
-### 1. Descrição Geral
+#### 1. Descrição Geral
 A API foi desenvolvida com foco no gerenciamento de informações de livros, utilizando dados importados de um arquivo CSV público obtido no Kaggle. O objetivo principal é oferecer uma interface para busca e cadastro de livros, assim como otimizar o desempenho com cache em operações de leitura intensiva. O projeto conta com endpoints para listar todos os livros, buscar por ID, autor e gênero, além de um endpoint para importar os dados diretamente do CSV.
 
-### 2. Estrutura dos Dados
+#### 2. Estrutura dos Dados
 O arquivo CSV utilizado para popular a base de dados contém as seguintes colunas:
 
 - **Title**: Título do livro.
@@ -55,14 +75,14 @@ O arquivo CSV utilizado para popular a base de dados contém as seguintes coluna
 - **No. of People Rated**: Número de usuários que avaliaram o livro.
 - **URLs**: Links para a página do livro no site da Amazon.
 
-### 3. Importação e Tratamento de Dados
+#### 3. Importação e Tratamento de Dados
 Durante o processo de importação, a API precisou lidar com inconsistências nos dados do CSV. Como o dataset original contém algumas informações fora do padrão, foram aplicados tratamentos específicos, como:
 
 - **Valores de Preço**: O preço dos livros continha o identificador da moeda local (ex: "$"), que foi removido para garantir a consistência nos dados numéricos.
 - **Número de Avaliadores**: Alguns valores na coluna "No. of People Rated" estavam representados como números flutuantes, o que foi corrigido para valores inteiros.
 - **Validação de Campos**: A importação também aplica validações nos dados, assegurando que os campos como Title, Author, e Price seguem os requisitos de não serem nulos ou vazios, bem como garantindo que valores como Price e Rating estejam dentro dos intervalos definidos.
 
-### 4. Validações e Tratamento de Exceções
+#### 4. Validações e Tratamento de Exceções
 Durante as operações de cadastro e consulta, foram implementadas diversas validações para garantir a integridade dos dados:
 
 - **Busca por ID Inexistente**: Quando o cliente tenta buscar um livro com um ID que não existe no banco de dados, a API retorna um erro 404 com a mensagem "Livro não encontrado".
@@ -73,7 +93,7 @@ Durante as operações de cadastro e consulta, foram implementadas diversas vali
 
 - **Feedback ao Cliente**: Em caso de falha nas validações, a API retorna mensagens de erro específicas, informando o cliente sobre quais campos estão incorretos ou faltantes, permitindo uma rápida correção.
 
-### 5. Testes e Garantia de Qualidade
+#### 5. Testes e Garantia de Qualidade
 A API foi construída seguindo a metodologia TDD (Test-Driven Development), utilizando JUnit para criar testes unitários robustos. Os testes desenvolvidos cobrem cenários como:
 
 - **Cadastro e Salvamento de Livros**: Testes que verificam a criação e persistência correta de um livro no banco de dados.
@@ -81,9 +101,9 @@ A API foi construída seguindo a metodologia TDD (Test-Driven Development), util
 
 Esses testes garantem a estabilidade da aplicação, assegurando que as funcionalidades cruciais estão funcionando conforme esperado.
 
-## III. Melhorias e Considerações Finais
+### III. Melhorias e Considerações Finais
 
-### 1. Melhorias Futuras
+#### 1. Melhorias Futuras
 
 Embora a API esteja funcional e tenha sido desenvolvida com boas práticas de modularidade e separação de responsabilidades, há algumas melhorias que podem ser implementadas para aprimorar a segurança, a escalabilidade e a experiência do usuário:
 
