@@ -1,5 +1,6 @@
 package br.com.sages.catalog.bookstore_api.controller;
 
+import br.com.sages.catalog.bookstore_api.controller.docs.BookControllerDoc;
 import br.com.sages.catalog.bookstore_api.domain.Book;
 import br.com.sages.catalog.bookstore_api.dto.BookDTO;
 import br.com.sages.catalog.bookstore_api.response.Response;
@@ -16,10 +17,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("books")
-public class BookController {
+public class BookController implements BookControllerDoc {
 
     @Autowired
     private BookService service;
+
 
     @PostMapping
     public ResponseEntity<Response<BookDTO>> create(@Valid @RequestBody BookDTO dto, BindingResult result) {
@@ -63,7 +65,7 @@ public class BookController {
             response.setData(convertEntityToDto(book));
             return ResponseEntity.ok(response);
         } else {
-            response.getErrors().add("Book " + id + "not found");
+            response.getErrors().add("Book " + id + " not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }

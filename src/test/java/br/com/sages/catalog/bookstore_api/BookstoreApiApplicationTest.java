@@ -14,5 +14,4 @@ class BookstoreApiApplicationTest {
 	@Test
 	void contextLoads() {
 	}
-
 }
