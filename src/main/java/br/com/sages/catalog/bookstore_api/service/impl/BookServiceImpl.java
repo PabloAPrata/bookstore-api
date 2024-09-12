@@ -3,6 +3,7 @@ package br.com.sages.catalog.bookstore_api.service.impl;
 import br.com.sages.catalog.bookstore_api.domain.Book;
 import br.com.sages.catalog.bookstore_api.repository.BookRepository;
 import br.com.sages.catalog.bookstore_api.service.BookService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class BookServiceImpl implements BookService {
     BookRepository repository;
 
     @Override
+    @Transactional
     public Book save(Book book) {
         return repository.save(book);
     }

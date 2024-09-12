@@ -3,6 +3,7 @@ package br.com.sages.catalog.bookstore_api.service.impl;
 import br.com.sages.catalog.bookstore_api.domain.Book;
 import br.com.sages.catalog.bookstore_api.repository.BookRepository;
 import br.com.sages.catalog.bookstore_api.service.DataImportService;
+import jakarta.transaction.Transactional;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 import java.nio.file.Paths;
 
 @Service
+@Transactional
 public class DataImportServiceImpl implements DataImportService {
 
     @Autowired
