@@ -15,6 +15,7 @@ A RESTFul API for an independent bookstore which allows customers to browse avai
 - Verifique se possue um banco de dados postgresql ativo.
 - Em application.properties e application-test.properties insira os dados do banco, username e password corretos na url.
 - Faça o build da aplicação
+- Após iniciar, faça uma requisição POST no endpoint "/load/books" sem body, para que insira os livros no database. 
 - Dica: Teste os endpoints com o postman
 
 ---
