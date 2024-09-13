@@ -10,8 +10,12 @@ A RESTFul API for an independent bookstore which allows customers to browse avai
 - Redis
 - Postgres 16
 
-## 2. Como Executar
+## 2. Antes de Executar
 
+- Verifique se possue um banco de dados postgresql ativo.
+- Em application.properties e application-test.properties insira os dados do banco, username e password corretos na url.
+- Faça o build da aplicação
+- Dica: Teste os endpoints com o postman
 
 ---
 
@@ -115,3 +119,6 @@ Embora a API esteja funcional e tenha sido desenvolvida com boas práticas de mo
 
 - **Funcionalidade de "Visualizados Recentemente"**: Outra funcionalidade interessante seria a adição de uma feature que armazena e exibe os livros visualizados recentemente pelos usuários, oferecendo uma navegação mais intuitiva e uma melhor experiência de uso.
 
+#### 2. Dificuldades
+
+- Não consegui configurar a aplicação para que fosse executada através do docker-compose. Tive problemas para configurar o banco de dados automaticamente e conversar entre as applicações.
